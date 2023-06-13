@@ -44,31 +44,33 @@ const Skills = () => {
           ))}
         </motion.div>
         <div className='app__skills-exp'>
-          {experiences.map((experience) => (
-            <motion.div className='app__skills-exp-item' key={experience.year}>
-              <div className='app__skills-exp-year'>
-                <p className='bold-text'>{experience.year}</p>
-              </div>
-              <motion.div className='app__skills-exp-works'>
-                {experience.works?.map((work) => (
-                  <div className='app__skills-tooltip' key={work.name}>
-                    <motion.div
-                      whileInView={{ opacity: [0, 1] }}
-                      transition={{ duration: 0.25 }}
-                      data-tooltip-id={work.name}
-                      className='app__skills-exp-work'
-                    >
-                      <h4 className='bold-text'>{work.name}</h4>
-                      <p className='p-text'>{work.company}</p>
-                    </motion.div>
-                    <ReactTooltip id={work.name} className='skills-tooltip'>
-                      {work.desc}
-                    </ReactTooltip>
-                  </div>
-                ))}
+          {experiences
+            .sort((a, b) => b.year - a.year)
+            .map((experience) => (
+              <motion.div className='app__skills-exp-item' key={experience.year}>
+                <div className='app__skills-exp-year'>
+                  <p className='bold-text'>{experience.year}</p>
+                </div>
+                <motion.div className='app__skills-exp-works'>
+                  {experience.works?.map((work) => (
+                    <div className='app__skills-tooltip' key={work.name}>
+                      <motion.div
+                        whileInView={{ opacity: [0, 1] }}
+                        transition={{ duration: 0.25 }}
+                        data-tooltip-id={work.name}
+                        className='app__skills-exp-work'
+                      >
+                        <h4 className='bold-text'>{work.name}</h4>
+                        <p className='p-text'>{work.company}</p>
+                      </motion.div>
+                      <ReactTooltip id={work.name} className='skills-tooltip'>
+                        {work.desc}
+                      </ReactTooltip>
+                    </div>
+                  ))}
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
         </div>
       </div>
     </>
