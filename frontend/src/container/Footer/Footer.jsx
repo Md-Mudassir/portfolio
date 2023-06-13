@@ -11,23 +11,42 @@ const Footer = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [danger, setDanger] = useState(false);
 
-  const { username, email, message } = formData;
+  const [emailError, setEmailError] = useState('');
+  const { name, email, message } = formData;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setDanger(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setLoading(true);
 
     const contact = {
       _type: 'contact',
-      name: formData.username,
+      name: formData.name,
       email: formData.email,
       message: formData.message,
     };
+
+    if (formData.name === '' || formData.message === '' || formData.email === '') {
+      setLoading(false);
+      setDanger(true);
+      return;
+    }
+
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+    if (!formData.email.match(mailformat)) {
+      setLoading(false);
+      setEmailError('Email id is invalid');
+      setDanger(true);
+      return;
+    }
 
     client
       .create(contact)
@@ -40,7 +59,7 @@ const Footer = () => {
 
   return (
     <>
-      <h2 className='head-text'>Let's Connect</h2>
+      <h2 className='head-text'>Take a coffee & chat with me</h2>
 
       <div className='app__footer-cards'>
         <div className='app__footer-card '>
@@ -62,44 +81,51 @@ const Footer = () => {
         </a>
       </div>
       {!isFormSubmitted ? (
-        <div className='app__footer-form app__flex'>
+        <form className='app__footer-form app__flex'>
           <div className='app__flex'>
             <input
               className='p-text'
+              name='name'
               type='text'
-              placeholder='Your Name'
-              name='username'
-              value={username}
+              placeholder='Your name'
+              value={name}
               onChange={handleChangeInput}
+              required
             />
           </div>
           <div className='app__flex'>
             <input
-              className='p-text'
-              type='email'
-              placeholder='Your Email'
+              className={`${danger ? 'danger' : 'p-text'}`}
               name='email'
+              type='email'
+              placeholder='Your email'
               value={email}
               onChange={handleChangeInput}
+              required
             />
+            {emailError && danger && (
+              <div className='app__flex'>
+                <p className='text-danger'>{emailError}</p>
+              </div>
+            )}
           </div>
           <div>
             <textarea
-              className='p-text'
-              placeholder='Your Message'
-              value={message}
               name='message'
+              value={message}
               onChange={handleChangeInput}
+              placeholder='Your Message'
+              className='p-text'
+              required
             />
           </div>
-          <button type='button' className='p-text' onClick={handleSubmit}>
+
+          <button type='submit' className='p-text' onClick={handleSubmit}>
             {!loading ? 'Send Message' : 'Sending...'}
           </button>
-        </div>
+        </form>
       ) : (
-        <div>
-          <h3 className='head-text'>Thank you for getting in touch!</h3>
-        </div>
+        <h3 className='thankyou'>Thank you for getting in touch</h3>
       )}
     </>
   );
