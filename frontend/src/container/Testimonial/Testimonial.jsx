@@ -7,7 +7,7 @@ import { urlFor, client } from '../../client';
 import './Testimonial.scss';
 
 const Testimonial = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [testimonials, setTestimonials] = useState([]);
   const [brands, setBrands] = useState([]);
 
@@ -32,7 +32,7 @@ const Testimonial = () => {
     <>
       {testimonials.length && (
         <>
-          <div className='app__testimonial-item app__flex'>
+          <div className='app__testimonial-item app__flex' id='testimonials'>
             <img
               src={urlFor(testimonials[currentIndex].imgurl)}
               alt={testimonials[currentIndex].name}
@@ -50,9 +50,9 @@ const Testimonial = () => {
           <div className='app__testimonial-btns app__flex'>
             <div
               className='app__flex'
-              onClick={() =>
-                handleClick(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1)
-              }
+              onClick={() => {
+                handleClick(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1);
+              }}
             >
               <HiChevronLeft />
             </div>
