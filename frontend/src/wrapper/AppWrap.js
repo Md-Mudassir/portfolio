@@ -9,10 +9,12 @@ const AppWrap = (Component, idName, classNames) =>
         <div className='app__wrapper app__flex'>
           <Component />
 
-          <div className='copyright'>
-            <p className='p-text'>{`${new Date().getFullYear()} © Mohammed Mudassir`}</p>
-            <p className='p-text'>All Rights Reserved</p>
-          </div>
+          {idName === 'contact' && (
+            <div className='copyright'>
+              <p className='p-text'>{`${new Date().getFullYear()} © Mohammed Mudassir`}</p>
+              <p className='p-text'>All Rights Reserved</p>
+            </div>
+          )}
         </div>
         <NavigationDots active={idName} />
       </div>
