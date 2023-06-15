@@ -32,7 +32,13 @@ const About = () => {
             className='app__profile-item'
             key={about.title + index}
           >
-            <img src={urlFor(about.imgUrl)} alt={about.title} loading='lazy' />
+            <img
+              src={urlFor(about.imgUrl)}
+              alt={about.title}
+              loading='lazy'
+              height={200}
+              width={300}
+            />
             {about.source?.length > 0 ? (
               <a href={about.source} target='_blank' rel='noreferrer'>
                 <h2 className='bold-text' style={{ marginTop: 20 }}>

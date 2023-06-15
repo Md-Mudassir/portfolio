@@ -37,6 +37,8 @@ const Testimonial = () => {
               src={urlFor(testimonials[currentIndex].imgurl)}
               alt={testimonials[currentIndex].name}
               loading='lazy'
+              height={100}
+              width={100}
             />
             <div className='app__testimonial-content'>
               <p className='p-text'>{testimonials[currentIndex].feedback}</p>
@@ -76,7 +78,13 @@ const Testimonial = () => {
             transition={{ duration: 0.5, type: 'tween' }}
             key={brand._id}
           >
-            <img src={urlFor(brand.imgUrl)} alt={brand.name} loading='lazy' />
+            <img
+              src={urlFor(brand.imgUrl)}
+              alt={brand.name}
+              loading='lazy'
+              height={100}
+              width={300}
+            />
           </motion.div>
         ))}
       </div>
