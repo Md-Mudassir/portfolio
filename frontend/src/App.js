@@ -13,7 +13,11 @@ const Work = lazy(() => import('./container/Work/Work'));
 const App = () => (
   <div className='app'>
     <Navbar />
-    <Suspense fallback={<h1>Loading…</h1>}>
+    <Suspense
+      fallback={
+        <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>....</h1>
+      }
+    >
       <Header />
       <About />
       <Work />

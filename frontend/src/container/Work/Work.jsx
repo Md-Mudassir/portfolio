@@ -21,7 +21,7 @@ const Work = () => {
   return (
     <>
       <h2 className='head-text'>
-        Creative <span>Projects</span> I've Worked On
+        Creative <span>Projects</span> & <span>Contributions</span> I've Done
       </h2>
 
       <motion.div
