@@ -8,7 +8,7 @@ const devOnlyPlugins = [getStartedPlugin()]
 
 export default defineConfig({
   name: 'default',
-  title: 'snow-stingray',
+  title: 'mudassir',
 
   projectId: 'g8i14l0m',
   dataset: 'production',
@@ -19,4 +19,3 @@ export default defineConfig({
     types: schemaTypes,
   },
 })
-
